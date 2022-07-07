@@ -30,41 +30,55 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Age Calculator"),
+        backgroundColor:  Colors.deepPurple,
+        centerTitle: true,
+        title: Text("Age Calculator",style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),),
       ),
-      
-      body:Column(children: [
-                            Text("What is your Birth Date?"),
-                                  SizedBox(
-                                      width: 200,
-                                      child: FittedBox(
-                                        child: TextButton(
-                                            style: TextButton.styleFrom(
-                                                primary: Colors.black,
-                                                backgroundColor: Colors.amber),
-                                            onPressed: () async {
-                                              
-                                              await showDatePicker(
-                                                context: context,
-                                                initialDate: DateTime.now(),
-                                                firstDate: DateTime(1850),
-                                                lastDate: DateTime.now(),
-                                              ).then((value) {
-                                                pickedDate = value!;
-                                                duration = AgeCalculator.age(value);
-                                                   age= DateTime.now().year - value.year;
-                                                setState(() {
-                                                });
-                                              });
-                                            },
-                                            child: SizedBox( child: FittedBox(child: Text('pick a date',style: TextStyle(color: Color(0xfff1fcef)),)))),
-                                      ),
-                                    ),
-
-                                  age==-1?Text("You Didnt Pick a date" ):  Text("Your Age is: $age"),
-                                    Text("Your Age is: $duration")
-         
-      ],)
+      backgroundColor: Colors.black,
+      body:Center(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 100, 1, 1),
+          child: Column(
+           // mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(40.0),
+                                  child: Text("What is your Birth Date?",style: TextStyle(color: Colors.blueAccent,fontSize: 30, fontWeight: FontWeight.bold,decorationThickness: 20),),
+                                ),
+                                      SizedBox(
+                                          width: 200,
+                                          child: FittedBox(
+                                            child: TextButton(
+                                                style: TextButton.styleFrom(
+                                                    primary: Colors.black,
+                                                    backgroundColor: Colors.deepPurple),
+                                                onPressed: () async {
+                                                  
+                                                  await showDatePicker(
+                                                    context: context,
+                                                    initialDate: DateTime.now(),
+                                                    firstDate: DateTime(1850),
+                                                    lastDate: DateTime.now(),
+                                                  ).then((value) {
+                                                    pickedDate = value!;
+                                                    duration = AgeCalculator.age(value);
+                                                       age= DateTime.now().year - value.year;
+                                                    setState(() {
+                                                    });
+                                                  });
+                                                },
+                                                child: SizedBox( child: FittedBox(child: Text('pick a date',style: TextStyle(color: Color(0xfff1fcef)),)))),
+                                          ),
+                                        ),
+                                            SizedBox(
+                                              height: 40,
+                                            ),
+                                      age==-1?Text("You Didn't Pick a date",style: TextStyle(color: Colors.blueAccent,fontSize: 20, fontWeight: FontWeight.bold), ):  Text("Your Age is: $age",style: TextStyle(color: Colors.blueAccent,fontSize: 20, fontWeight: FontWeight.bold),),
+                                    age==-1?Text(""):  Text("$duration",style: TextStyle(color: Colors.blueAccent,fontSize: 20, fontWeight: FontWeight.bold),)
+             
+          ],),
+        ),
+      )
       
     );
 
